@@ -1,0 +1,26 @@
+#!/usr/bin/perl -w
+#
+#################################################################
+#
+#   quickrm
+#
+#   USAGE: quickrm fil1 [...]
+#
+#   Move things out of the way quickly, then delete then.
+#   Specifically, rename file to file-REMOVEME then 'rm *REMOVEME'.
+#
+#   quickrm,v 1.1 2006/04/08 00:23:57 turian Exp
+#
+#
+#################################################################
+
+
+foreach $f (@ARGV) {
+	$f =~ s/\/$//;
+	$newf = "$f-REMOVEME";
+	die "$!: $f" if not -e $f;
+	die $! if -e $newf;
+	system("mv $f $newf");
+}
+print STDERR "Done renaming, now removing\n";
+system("rm -Rf *REMOVEME");

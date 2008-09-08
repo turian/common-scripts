@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+# takes optional starting line number
+# from Dan Melamed
+
+$start = shift(ARGV) - 1;
+
+while (<>) {
+	print $start + $., " ", $_;
+};
+

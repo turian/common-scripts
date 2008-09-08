@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+# Number lines, normalized from 0 through 1
+
+@lines = ();
+$cnt = 0;
+while (<>) {
+	push(@lines, $_);
+	$cnt++;
+};
+
+$i = 0;
+foreach (@lines) {
+	print $i++/$cnt, " ", $_;
+}

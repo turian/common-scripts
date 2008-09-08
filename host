@@ -1,0 +1,7 @@
+#!/usr/bin/python
+import sys
+sys.path.append("/home/turian/common/python_modules/")
+import host
+h = host.get_host()
+if h == 'euler08': h = "x86_64"
+print h
