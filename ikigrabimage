@@ -1,0 +1,57 @@
+#!/usr/bin/python
+#
+#  Grab an image to the iki-wiki, and save the source url into a
+#  markdown file.
+#
+#  Usage: ikigrabimage [options] url
+#
+#  Options:
+#    -h, --help            show this help message and exit
+#    -o BASENAME, --output=BASENAME
+#                          basename
+#
+
+from os.path import join, split, splitext
+import os
+from common.misc import runcmd
+import sys
+from urlparse import urlparse
+from optparse import OptionParser
+
+IMAGEDIR = join(os.environ["HOME"], "iki/images")
+
+usage = "usage: %prog [options] url"
+parser = OptionParser(usage)
+parser.add_option("-o", "--output", dest="basename",
+                    help="basename")
+(options, args) = parser.parse_args()
+if len(args) != 1:
+    parser.error("incorrect number of arguments")
+
+url = args[0]
+if not options.basename:
+    options.basename = splitext(split(urlparse(url).path)[1])[0]
+
+ext = splitext(url)[1]
+
+outputimage_file = "%s%s" % (options.basename, ext)
+outputdesc_desc = "%s.mdwn" % (options.basename)
+outputimage = join(IMAGEDIR, outputimage_file)
+outputdesc = join(IMAGEDIR, outputdesc_desc)
+
+cmd = "wget %s -O %s" % (url, outputimage)
+sys.stderr.write("%s\n" % cmd)
+runcmd(cmd)
+
+desctext = """
+[[!img %s]]
+
+Image from 
+<%s>
+""" % (outputimage_file, url)
+
+sys.stderr.write("Writing to file %s\n" % outputdesc)
+open(outputdesc, "wt").write(desctext)
+cmd = "cd %s && /usr/bin/git add %s %s" % (IMAGEDIR, outputimage_file, outputdesc_desc)
+sys.stderr.write("%s\n" % cmd)
+os.system(cmd)

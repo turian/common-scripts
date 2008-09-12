@@ -1,0 +1,93 @@
+#!/usr/bin/perl
+# "I have a blog program that I use to write blog posts in a text
+# editor. The first line I enter is used as the title, and it
+# automatically comes up with a unique page name based on the title and
+# handles all the details of posting to my blog."
+# From http://ikiwiki.info/tips/blog_script/
+# Copyright 2004 by Joey Hess under the terms of the GNU GPL, version 2
+# or above.
+
+use warnings;
+use strict;
+use IkiWiki;
+
+my $param=shift;
+
+if (defined $param && $param eq '-h') {
+	print "usage: quip [local|commit]\n";
+	print "Default is to write a new entry and commit all queued entries.\n";
+	print "Use local to write an entry that is local to this machine.\n";
+	print "Use commit to only commit queued entries.\n";
+}
+
+my $blogdir="$ENV{HOME}/iki/quip/entry";
+my $tmp="new-entry.mdwn";
+
+chdir($blogdir) || die "chdir $blogdir: $!";
+
+sub localbuild {
+	system("ikiwiki", "-setup", "$ENV{HOME}/.ikiwiki/iki.setup",
+		"--refresh", "-v");
+}
+
+if (! defined $param || $param ne 'commit') {
+	if (system($ENV{EDITOR}, $tmp) != 0) {
+		die "editor exited nonzero!\n";
+	}
+	if (-z $tmp) {
+		unlink $tmp;
+		die "aborting on empty file\n";
+	}
+
+	open(IN, $tmp) || die "aborting on no file\n";
+	my $head=<IN>;
+	<IN>;
+	my $body;
+	{
+		local $/;
+		$body=<IN>;
+	}
+	close IN;
+
+	open(OUT, ">$tmp") || die "$tmp: $!\n";
+	print OUT $body;
+
+	chomp $head; # ouch!
+	if (! length $head) {
+		die "aborting on empty title, left $tmp behind\n";
+	}
+
+	my $ext=".mdwn";
+	my $base=IkiWiki::titlepage($head);
+	my $file=$base.$ext;
+	$file=~s!/!"__".ord('/')."__"!eg;
+	if (-e $file) {
+		my $n=2;
+		while (-e $base.$n.$ext) {
+			$n++;
+		}
+		$file=$base.$n.$ext;
+		print OUT "\n[[meta title=\"$head\"]]\n";
+	}
+	close OUT;
+	system("mv", "-f", $tmp, $file);
+
+	if (! defined $param || $param ne 'local') {
+		if (system("git", "add", $file) != 0) {
+			die "git add $file failed; do it yourself\n";
+		}
+	}
+	localbuild();
+}
+else {
+	localbuild();
+}
+
+if (! defined $param || $param ne 'local') {
+	if (system("git", "commit", "-a", "-m", "quip update") != 0) {
+		die "git commit failed; run quip commit later\n";
+	}
+	if (system("git", "push") != 0) {
+		die "git push failed\n";
+	}
+}
