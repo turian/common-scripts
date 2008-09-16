@@ -23,6 +23,7 @@ foreach $g (@gals) {
 	$cmd = "ls $g/*jpg 2> /dev/null";
 
 	$files = `$cmd`;
+    $files =~ s/ /\\ /g;
 	@thisf = split(/\S+/, $files);
 	next if scalar @thisf < $min_images_per_directory;
 	next if (scalar @thisf > $max_images_per_directory && $max_images_per_directory > 0);

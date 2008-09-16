@@ -34,6 +34,11 @@ if not options.basename:
 
 ext = splitext(url)[1]
 
+import re
+if re.compile("\&").search(options.basename):
+    sys.stderr.write("Output name should not contain '&' character. Aborting...\n")
+    sys.exit(-1)
+
 outputimage_file = "%s%s" % (options.basename, ext)
 outputdesc_desc = "%s.mdwn" % (options.basename)
 outputimage = join(IMAGEDIR, outputimage_file)
