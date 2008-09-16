@@ -38,6 +38,7 @@ foreach $g (@gals) {
 	last if scalar @allf > $count;
 }
 
-open(O, "| xargs xv");
-print $lst;
+#open(O, "| xargs xv");
+open(O, "| xargs kview");
+#print $lst;
 print O $lst;
