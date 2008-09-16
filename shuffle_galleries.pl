@@ -18,9 +18,10 @@ use List::Util 'shuffle';
 $lst = "";
 foreach $g (@gals) {
 	next if -e "$g/BLOCKED";	# Skip blocked galleries
-    $g =~ s/"/\\"/g;
-    $g = "\"$g\"";
-	$cmd = "ls $g/*jpg 2> /dev/null";
+    $gnew = $g;
+    $gnew =~ s/"/\\"/g;
+#	$cmd = "ls \"$gnew/\"*jpg 2> /dev/null";
+	$cmd = "ls \"$gnew/\"*jpg";
 
 	$files = `$cmd`;
     $files =~ s/ /\\ /g;
@@ -33,4 +34,7 @@ foreach $g (@gals) {
 	@allf = split(/\S+/, $lst);
 	last if scalar @allf > $count;
 }
-print $lst;
+
+open(O, "| xargs xv");
+#print $lst;
+print O $lst;
