@@ -18,23 +18,26 @@ use List::Util 'shuffle';
 $lst = "";
 foreach $g (@gals) {
 	next if -e "$g/BLOCKED";	# Skip blocked galleries
-    $gnew = $g;
-    $gnew =~ s/"/\\"/g;
-#	$cmd = "ls \"$gnew/\"*jpg 2> /dev/null";
-	$cmd = "ls \"$gnew/\"*jpg";
 
-	$files = `$cmd`;
-    $files =~ s/ /\\ /g;
-	@thisf = split(/\S+/, $files);
+    if (not opendir(D, $g)) {
+        print STDERR "Can't open $g for reading: $!\n";
+        next;
+    }
+    @thisf = grep { /^.*\.jpg$/i && -f "$g/$_" } readdir(D);
+    closedir D;
+
+    s/^/$g\// for @thisf;
+    s/ /\\ /g for @thisf;
+#    foreach $f (@thisf) { print "$f\n"; }
 	next if scalar @thisf < $min_images_per_directory;
 	next if (scalar @thisf > $max_images_per_directory && $max_images_per_directory > 0);
 
-	$lst = $lst . $files;
+	$lst = $lst . join("\n", @thisf) . "\n";
 
 	@allf = split(/\S+/, $lst);
 	last if scalar @allf > $count;
 }
 
 open(O, "| xargs xv");
-#print $lst;
+print $lst;
 print O $lst;
