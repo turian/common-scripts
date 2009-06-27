@@ -1,9 +1,10 @@
 #!/usr/bin/perl -w
 
+$count = 8000;
 #$count = 4000;
 #$count = 2000;
 #$count = 1000;
-$count = 500;
+#$count = 500;
 $min_images_per_directory = 5;
 $max_images_per_directory = -1;
 #$min_images_per_directory = 0;
@@ -33,6 +34,11 @@ foreach $g (@gals) {
 	next if scalar @thisf < $min_images_per_directory;
 	next if (scalar @thisf > $max_images_per_directory && $max_images_per_directory > 0);
 
+    print "$g\n";
+    open(O, "| xargs gqview");
+    print O join("\n", @thisf);
+    close O;
+
 	$lst = $lst . join("\n", @thisf) . "\n";
     $setlst = $setlst . $g . "\n";
 
@@ -42,6 +48,8 @@ foreach $g (@gals) {
 
 #open(O, "| xargs xv");
 #open(O, "| xargs kview");
-open(O, "| xargs gqview");
-print O $lst;
-print $setlst;
+
+#open(O, "| xargs gqview");
+#print O $lst;
+#print $setlst;
+#close O;
