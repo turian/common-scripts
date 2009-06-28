@@ -31,23 +31,8 @@ assert options.infile is not None
 assert options.outfile is not None
 assert options.key is not None
 
-
-assert not os.path.exists(options.outfile)
-from pytc import HDB, HDBOWRITER, HDBOCREAT, HDBTBZIP
-hdb = HDB()
-hdb.open(options.outfile, HDBOWRITER | HDBOCREAT)
-#     bnum - the number of elements of the bucket array. If it is
-#     not more than 0, the default value is specified. The default value
-#     is 131071. Suggested size of the bucket array is about from 0.5
-#     to 4 times of the number of all records to be stored.
-#     apow - the size of record alignment by power of 2. If it is
-#       negative, the default value is specified. The default value is
-#       4 standing for 2^4=16.
-#     fpow - the maximum number of elements of the free block pool
-#       by power of 2. If it is negative, the default value is
-#       specified. The default value is 10 standing for 2^10=1024.
-#hdb.tune(bnum=131071, apow=4, fpow=10, opts=HDBTBZIP)
-#hdb.tune(bnum=131071, apow=4, fpow=10, opts=0)
+from common.hashdb import create
+hdb = common.hashdb.create(options.outfile)
 
 cnt = 0
 for d in common.myyaml.load_all(common.file.myopen(options.infile)):

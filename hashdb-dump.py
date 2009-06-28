@@ -18,24 +18,16 @@ parser.add_option("-i", "--infile", dest="infile", help="TokyoCabinet infile")
 (options, args) = parser.parse_args()
 assert options.infile is not None
 
-
-from pytc import HDB, HDBOREADER
-hdb = HDB()
-hdb.open(options.infile, HDBOREADER)
+from common.hashdb import read
 
 sys.stderr.write(stats() + "\n")
 # traverse records
-hdb.iterinit()
-for key in hdb.keys():
+for (key, value) in common.hashdb.read(options.infile):
     sys.stderr.write(stats() + "\n")
-    value = hdb.get(key)
-    value = common.json.loads(value)
     print key
     print common.myyaml.dump(value)
 #    if key in value:
 #        print value
 #    else:
 #        print key, value
-
-hdb.close()
 sys.stderr.write(stats() + "\n")
