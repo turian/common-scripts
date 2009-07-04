@@ -12,17 +12,20 @@ import common.json
 from common.stats import stats
 import os.path
 
-from optparse import OptionParser
-parser = OptionParser()
-parser.add_option("-i", "--infile", dest="infile", help="TokyoCabinet infile")
-(options, args) = parser.parse_args()
-assert options.infile is not None
+#from optparse import OptionParser
+#parser = OptionParser()
+#parser.add_option("-i", "--infile", dest="infile", help="TokyoCabinet infile")
+#(options, args) = parser.parse_args()
+#assert options.infile is not None
+
+assert len(sys.argv) == 2
+infile = sys.argv[1]
 
 from common.hashdb import read
 
 sys.stderr.write(stats() + "\n")
 # traverse records
-for (key, value) in common.hashdb.read(options.infile):
+for (key, value) in common.hashdb.read(infile):
     sys.stderr.write(stats() + "\n")
     print key
     print common.myyaml.dump(value)
