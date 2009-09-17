@@ -22,10 +22,13 @@ insert it into the sorted list.
     * We place this curve into the sorted list, to minimize the number
     of rank errors of curve estimates at this x-value.
 
-Takes into account that curves might not be the same distance.
-We assume that every x point is at the same fixed interval, e.g. every
-10K steps, across all curves. This is for the sake of the moving average.
-We assume each input is two column format, with increasing x value.
+You can read more about this heuristic here:
+    http://blog.metaoptimize.com/2009/09/17/automatically-sorting-graph-curves/
+
+NOTES:
+    * We assume that every x point is at the same fixed interval, e.g. every
+    10K steps, across all curves. This is for the sake of the moving average.
+    * We assume each input is two column format, with increasing x value.
 
 KNOWN ISSUES:
     * We use rank violations, not actual distance
