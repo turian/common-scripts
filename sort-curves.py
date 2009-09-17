@@ -1,15 +1,42 @@
-#!/usr/bin/python
-#
-#  Automatically (heuristically) sort curves in a graph in descending order.
-#  Takes into account that curves might not be the same distance.
-#  We assume that every x point is at the same fixed interval, e.g. every
-#  10K steps, across all curves.
-#  [for sake of moving average]
-#  We assume each input is two column format, with increasing x value.
-#  Potential problem: We use rank violations, not actual distance
-#  BUG: We don't count curves with exact same mean. However, this should happen very rarely.
-#  BUG: We should randomly tiebreak between curves with same rank error.
-#
+#!/usr/bin/env python
+"""
+Automatically (heuristically) sort curves in a graph in descending
+order.
+
+USAGE:
+    ./sort-curves.py *dat
+where every *dat is standard (gnuplot) two-column-per-line format:
+    xvalue yvalue
+
+The heuristic sorting approach is as follows:
+* We maintain a sorted list of curves, from highest to lowest. The sorted
+list is initialized to empty.
+* At each iteration, we find the curve that goes the furthest out on the
+x-axis, but is not yet in the sorted list. We then will choose where to
+insert it into the sorted list.
+    * For this curve and all curves in the sorted list, we want an
+    estimate of the curve value at the current curve's furthest
+    x-value. We compute this estimate using a moving average. (For this
+    reason, all curves should have aligned x-axis steps, and should have
+    equidistant x-axis steps.)
+    * We place this curve into the sorted list, to minimize the number
+    of rank errors of curve estimates at this x-value.
+
+Takes into account that curves might not be the same distance.
+We assume that every x point is at the same fixed interval, e.g. every
+10K steps, across all curves. This is for the sake of the moving average.
+We assume each input is two column format, with increasing x value.
+
+KNOWN ISSUES:
+    * We use rank violations, not actual distance
+    * We don't count curves with exact same mean when computing rank
+    violations. However, this should happen very rarely.
+    * We should randomly tiebreak between curves with same rank error,
+    but instead we deterministically tiebreak.
+    * We don't check that all x-steps are equidistant.
+    * We don't check that all curves have aligned x-steps.
+"""
+
 
 from common.movingaverage import MovingAverage
 
@@ -28,7 +55,8 @@ for f in sys.argv[1:]:
             # Make sure x values are increasing
             assert curves[f][-1][0] > curves[f][-2][0]
 
-# TODO: Assert fixed internal across all curves
+# TODO: Assert all curves have aligned x-steps.
+# TODO: Assert that all x-steps are equidistant.
 
 # Find the last x point for each curve, and sort in decreasing order
 sortedlastx = []
