@@ -1,3 +1,6 @@
+local/
+    * Files of local interest, e.g. with fixed hostnames
+
 README.txt			- This file
 citeseer-get.pl			- Fetch PDFs from citeseer.
 
