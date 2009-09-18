@@ -57,6 +57,7 @@ for f in sys.argv[1:]:
         if len(curves[f]) > 1:
             # Make sure x values are increasing
             assert curves[f][-1][0] > curves[f][-2][0]
+    if len(curves[f]) == 0: del curves[f]
 
 # TODO: Assert all curves have aligned x-steps.
 # TODO: Assert that all x-steps are equidistant.
