@@ -34,4 +34,5 @@ assert map["*UNKNOWN*"] == 0
 for l in myopen(sys.argv[2]):
     for w in string.split(l):
         if w in map: print map[w],
-        else: print map["*UNKNOWN*"]
+        else: print map["*UNKNOWN*"],
+    print
