@@ -19,3 +19,7 @@ print-all.pl			    - For each file (.ps or .pdf) specified
 shuffle/shuffle.sh		    - Shuffle lines of stdin
 
 sort-curves.py              - Sort gnuplot curves
+
+words-to-integers.py        - Convert words to integers, according to
+                            the mapping in mapfile.
+

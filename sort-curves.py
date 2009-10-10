@@ -52,6 +52,8 @@ for f in sys.argv[1:]:
     curves[f] = []
 #    print f
     for l in open(f):
+#        print l,
+        if string.strip(l) == "": continue
         x, y = string.split(l)
         curves[f].append((float(x), float(y)))
         if len(curves[f]) > 1:
