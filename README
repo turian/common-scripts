@@ -16,6 +16,9 @@ print-all.pl			    - For each file (.ps or .pdf) specified
             				as a command-line argument, print the
             				file to a random printer.
 
+ptb/one-sentence-per-line.pl    - Output one PTB sentence per line,
+                            using PTB tagged/ files.
+
 shuffle/shuffle.sh		    - Shuffle lines of stdin
 
 sort-curves.py              - Sort gnuplot curves
