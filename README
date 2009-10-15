@@ -12,6 +12,8 @@ htmldecode.pl               - Decode HTML entities, e.g. &lt; becomes <
 
 htmlencode.pl               - Encode HTML entities, e.g. < becomes &lt;
 
+html2text                   - Convert HTML to text
+
 page-count.pl			    - For each file (usually .ps or .pdf)
                             specified in stdin, count the number of
                             pages in the file
