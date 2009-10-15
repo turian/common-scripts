@@ -8,6 +8,10 @@ citeseer-get.pl			    - Fetch PDFs from citeseer.
 enscript-landscape-all.pl	- Enscript all files listed in @ARGV in
             				landscape mode.
 
+htmldecode.pl               - Decode HTML entities, e.g. &lt; becomes <
+
+htmlencode.pl               - Encode HTML entities, e.g. < becomes &lt;
+
 page-count.pl			    - For each file (usually .ps or .pdf)
                             specified in stdin, count the number of
                             pages in the file
