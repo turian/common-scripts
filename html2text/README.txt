@@ -32,7 +32,12 @@ TODO!
 
 REQUIREMENTS:
     * HTML tidy
-    * html2text:  http://userpage.fu-berlin.de/~mbayer/tools/html2text.html
+    * html2text:
+        http://userpage.fu-berlin.de/~mbayer/tools/html2text.html
+        You should also apply the UTF-8 patch:
+            http://www.mbayer.de/html2text/downloads/patch-utf8-html2text-1.3.2a.diff
+        If you are on an AMD64 architecture, you should apply this patch:
+            http://www.mbayer.de/html2text/downloads/patch-amd64-html2text-1.3.2a.diff
     * HTML::Entities perl module
         for htmldecode.pl
 
