@@ -1,8 +1,10 @@
 Update:
     Use --force-output yes in tidy, instead of removing errant tags.
 
-
 We assume that everything is in UTF-8 encoding.
+
+There is a python interface to this approach in common.html2text:
+    http://github.com/turian/common/blob/master/html2text.py
 
 html2text.pl
     = ./remove-errant-tags.pl | tidy -quiet | html2text -nobs -style pretty  -rcfile html2textrc
