@@ -27,6 +27,8 @@ ptb/one-sentence-per-line.pl    - Output one PTB sentence per line,
 
 read-xml-mysqldump.py       - Read in the XML mysqldump from sys.sdin.
 
+remove-nonascii-characters.pl   - Remove non-ASCII characters
+
 shuffle/shuffle.sh		    - Shuffle lines of stdin
 
 sort-curves.py              - Sort gnuplot curves
