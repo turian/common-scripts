@@ -5,6 +5,10 @@ README.txt			        - This file
 
 citeseer-get.pl			    - Fetch PDFs from citeseer.
 
+delexicalize-low-frequency-words.py
+                            - Delexicalize all words with freq less than
+                            minfreq to *UNKNOWN*
+
 enscript-landscape-all.pl	- Enscript all files listed in @ARGV in
             				landscape mode.
 
@@ -20,6 +24,8 @@ shuffle/shuffle.sh		    - Shuffle lines of stdin
 
 sort-curves.py              - Sort gnuplot curves
 
+words-integers-mapfile.py   - Create a integers mapfile for the words
+                            in textfile.
+
 words-to-integers.py        - Convert words to integers, according to
                             the mapping in mapfile.
-
