@@ -1,4 +1,4 @@
-#!/usr/bin/python2.4
+#!/usr/bin/env python
 #
 #######################################################################
 #
@@ -10,12 +10,12 @@
 #   Interleave files to stdout.
 #
 #   Output will be of the following form:
-#	line 1 of file 1
-#	line 1 of file 2
-#	...
+#    line 1 of file 1
+#    line 1 of file 2
+#    ...
 #
-#	line 2 of file 1
-#	line 2 of file 2
+#    line 2 of file 1
+#    line 2 of file 2
 #       ...
 #
 #   At least two files must be given as command-line parameters.
@@ -25,38 +25,36 @@
 #   TODO
 #       * Low-memory mode, which doesn't read in the files all at once.
 #
-#   interleave,v 1.1 2005/07/26 06:18:36 turian Exp
 #
-#
-#######################################################################
-# Copyright (c) 2004, 2005, New York University. All rights reserved
 #######################################################################
 
-import sys
+import sys, string
 
 args = sys.argv[1:]
 no_break = False
 if args[0] == "--no-break":
-	no_break = True
-	args = args[1:]
+    no_break = True
+    args = args[1:]
 
 # The number of files to be interleaved
 cnt = len(args)
 assert cnt >= 2
 
+from common.file import myopen
 lines = []
 for n in args:
-#	sys.stderr.write("%s\n" % n)
-	f = open(n)
-	lines.append(f.readlines())
-	f.close()
+#    sys.stderr.write("%s\n" % n)
+    f = myopen(n)
+    lines.append(f.readlines())
+    f.close()
 
 # Make sure all files have the same number of lines
 for i in range(1, cnt):
-	assert len(lines[i]) == len(lines[0])
+    assert len(lines[i]) == len(lines[0])
 
 # Now, actually interleave them
 for i1 in range(len(lines[0])):
-	for i2 in range(cnt):
-		print lines[i2][i1],
-	if not no_break: print
+    for i2 in range(cnt):
+        print string.strip(lines[i2][i1]),
+        if not no_break: print
+    if no_break: print

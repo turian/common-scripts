@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 #  USAGE:
-#   ./words-to-integers.py mapfile textfile
+#   ./words-to-integers.py mapfile < textfile
 #
 #  Each word in textfile will be converted to a number, according to the mapping in mapfile.
 #
@@ -16,7 +16,7 @@
 import sys, string
 from common.file import myopen
 
-assert len(sys.argv) == 3
+assert len(sys.argv) == 2
 map = {}
 cnt = 0
 for l in myopen(sys.argv[1]):
@@ -31,7 +31,7 @@ for l in myopen(sys.argv[1]):
     cnt += 1
 assert map["*UNKNOWN*"] == 0
 
-for l in myopen(sys.argv[2]):
+for l in sys.stdin:
     for w in string.split(l):
         if w in map: print map[w],
         else: print map["*UNKNOWN*"],
