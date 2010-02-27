@@ -4,7 +4,7 @@
 #
 
 while(<>) {
-	if (/[0-9\.]+\s*(.*)/s) {
+	if (/[0-9\.]+\s(.*)/s) {
 		print $1;
 	} else {
 		die "Cannot parse: $_";
