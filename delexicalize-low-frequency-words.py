@@ -25,7 +25,11 @@ cnt = defaultdict(int)
 
 print >> sys.stderr, "Reading %s for word freqs..." % f
 print >> sys.stderr, stats()
-for l in myopen(f):
+for i, l in enumerate(myopen(f)):
+    if i % 1000000 == 0 and i > 0:
+        print >> sys.stderr, "\t%d lines read from %s (phase 1 of 2)" % (i, f)
+        print >> sys.stderr, stats()
+        break
     for w in string.split(l):
         cnt[w] += 1
 print >> sys.stderr, "...done reading %s for word freqs" % f
@@ -33,7 +37,11 @@ print >> sys.stderr, stats()
 
 print >> sys.stderr, "Delexicalizing %s words with freq<%d..." % (f, minfreq)
 print >> sys.stderr, stats()
-for l in myopen(f):
+for i, l in enumerate(myopen(f)):
+    break
+    if i % 1000000 == 0 and i > 0:
+        print >> sys.stderr, "\t%d lines read from %s (phase 1 of 2)" % (i, f)
+        print >> sys.stderr, stats()
     for w in string.split(l):
         if cnt[w] < minfreq:
             print UNKNOWN,
@@ -41,4 +49,10 @@ for l in myopen(f):
             print w,
     print
 print >> sys.stderr, "...done delexicalizing %s words with freq<%d" % (f, minfreq)
+
+keep = 1    # Start at 1, not zero, for *UNKNOWN*
+for w in cnt:
+    if cnt[w] >= minfreq: keep += 1
+from common.str import percent
+print >> sys.stderr, "Vocabulary is now %s words" % percent(keep, len(cnt))
 print >> sys.stderr, stats()
