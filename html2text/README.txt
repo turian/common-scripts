@@ -1,3 +1,7 @@
+NB:
+    NCleaner might even be more effective, because it removes boiler-plate!
+        http://webascorpus.sourceforge.net/
+
 Update:
     Use --force-output yes in tidy, instead of removing errant tags.
 

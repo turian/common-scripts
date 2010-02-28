@@ -5,6 +5,9 @@ README.txt			        - This file
 
 citeseer-get.pl			    - Fetch PDFs from citeseer.
 
+cumulative.py               - Output a cumulative sum for each line in
+                            the input file.
+
 enscript-landscape-all.pl	- Enscript all files listed in @ARGV in
             				landscape mode.
 
