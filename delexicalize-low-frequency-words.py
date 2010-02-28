@@ -29,7 +29,6 @@ for i, l in enumerate(myopen(f)):
     if i % 1000000 == 0 and i > 0:
         print >> sys.stderr, "\t%d lines read from %s (phase 1 of 2)" % (i, f)
         print >> sys.stderr, stats()
-        break
     for w in string.split(l):
         cnt[w] += 1
 print >> sys.stderr, "...done reading %s for word freqs" % f
@@ -38,7 +37,6 @@ print >> sys.stderr, stats()
 print >> sys.stderr, "Delexicalizing %s words with freq<%d..." % (f, minfreq)
 print >> sys.stderr, stats()
 for i, l in enumerate(myopen(f)):
-    break
     if i % 1000000 == 0 and i > 0:
         print >> sys.stderr, "\t%d lines read from %s (phase 1 of 2)" % (i, f)
         print >> sys.stderr, stats()
