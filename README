@@ -15,6 +15,10 @@ delexicalize-low-frequency-words.py
 enscript-landscape-all.pl	- Enscript all files listed in @ARGV in
             				landscape mode.
 
+from-one-line-per-word-to-one-line-per-sentence.py
+                            - Read one-line-per-word and convert to
+                            one-line-per-sentence.
+
 htmldecode.pl               - Decode HTML entities, e.g. &lt; becomes <
 
 htmlencode.pl               - Encode HTML entities, e.g. < becomes &lt;
