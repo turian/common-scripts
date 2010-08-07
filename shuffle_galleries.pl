@@ -35,7 +35,8 @@ foreach $g (@gals) {
 	next if (scalar @thisf > $max_images_per_directory && $max_images_per_directory > 0);
 
     print "$g\n";
-    open(O, "| xargs gqview");
+    open(O, "| xargs eog");
+#    open(O, "| xargs gqview");
     print O join("\n", @thisf);
     close O;
 
