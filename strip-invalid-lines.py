@@ -11,7 +11,7 @@ cnt = 0
 for l in sys.stdin:
     tot += 1
     try:
-        print l.decode("utf-8").encode("utf-8"),
+        print l.decode("utf-8"),
     except:
         cnt += 1
 
