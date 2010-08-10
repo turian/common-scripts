@@ -25,6 +25,10 @@ htmlencode.pl               - Encode HTML entities, e.g. < becomes &lt;
 
 html2text                   - Convert HTML to text
 
+one-sentence-per-line-to-json.py
+                            - For line in stdin, convert it to a JSON
+                            dict with key: "content" and value: line.
+
 page-count.pl			    - For each file (usually .ps or .pdf)
                             specified in stdin, count the number of
                             pages in the file
