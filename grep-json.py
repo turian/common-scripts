@@ -15,7 +15,7 @@ assert len(sys.argv) > 1
 
 import re
 allre = [re.compile(arg, re.I) for arg in sys.argv[1:]]
-for arg in sys.argv[1:]: print arg
+#for arg in sys.argv[1:]: print arg
 
 import common.json
 from common.str import percent
