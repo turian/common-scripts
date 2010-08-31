@@ -19,6 +19,9 @@ filter-json.py              - Filter JSON in sys.stdin to find only docs
                             that match each regex with at least one
                             field value.
 
+join-json.py                - For each JSON file in sys.argv, join them
+                            and output to stdout.
+
 lines-with-funny-characters.pl
                             - Print lines with funny characters
 
