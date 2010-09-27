@@ -12,6 +12,8 @@ delexicalize-low-frequency-words.py
                             - Delexicalize all words with freq less than
                             minfreq to *UNKNOWN*
 
+dumpdb.py                   - Dump the MongoDB
+
 enscript-landscape-all.pl	- Enscript all files listed in @ARGV in
             				landscape mode.
 
@@ -72,3 +74,4 @@ words-integers-mapfile.py   - Create a integers mapfile for the words
 words-to-integers.py        - Convert words to integers, according to
                             the mapping in mapfile.
 
+xmlmysqldump.py             - Read in the XML mysqldump for sys.sdin.
