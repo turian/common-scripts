@@ -68,6 +68,9 @@ shuffle/shuffle.sh		    - Shuffle lines of stdin
 
 sort-curves.py              - Sort gnuplot curves
 
+vowpal-to-libsvm.py         - Convert a vowpal-wabbit file in stdin
+                            to libsvm.
+
 words-integers-mapfile.py   - Create a integers mapfile for the words
                             in textfile.
 
