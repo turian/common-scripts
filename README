@@ -68,6 +68,8 @@ shuffle/shuffle.sh		    - Shuffle lines of stdin
 
 sort-curves.py              - Sort gnuplot curves
 
+tsv-to-json.py              - Read TSV from stdin and output as JSON.
+
 words-integers-mapfile.py   - Create a integers mapfile for the words
                             in textfile.
 
