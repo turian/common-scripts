@@ -70,6 +70,9 @@ sort-curves.py              - Sort gnuplot curves
 
 tsv-to-json.py              - Read TSV from stdin and output as JSON.
 
+vowpal-to-libsvm.py         - Convert a vowpal-wabbit file in stdin
+                            to libsvm.
+
 words-integers-mapfile.py   - Create a integers mapfile for the words
                             in textfile.
 
