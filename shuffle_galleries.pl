@@ -26,6 +26,7 @@ foreach $g (@gals) {
         next;
     }
     @thisf = grep { /^.*\.jpg$/i && -f "$g/$_" } readdir(D);
+    sort @thisf;
     closedir D;
 
     s/^/$g\// for @thisf;
@@ -39,6 +40,12 @@ foreach $g (@gals) {
 #    open(O, "| xargs gqview");
     print O join("\n", @thisf);
     close O;
+
+#    print `ps ax | grep eog | grep xargs | wc -l`;
+    while (`ps ax | grep eog | grep xargs | wc -l` > 1) {
+#        print `ps ax | grep eog | grep xargs | wc -l`;
+        sleep 1;
+    }
 
 	$lst = $lst . join("\n", @thisf) . "\n";
     $setlst = $setlst . $g . "\n";
