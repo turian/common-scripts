@@ -21,6 +21,10 @@ filter-json.py              - Filter JSON in sys.stdin to find only docs
                             that match each regex with at least one
                             field value.
 
+from-one-line-per-word-to-one-line-per-sentence.py
+                            - Read one-line-per-word and convert to
+                            one-line-per-sentence.
+
 join-json.py                - For each JSON file in sys.argv, join them
                             and output to stdout.
 
@@ -30,9 +34,7 @@ lines-with-funny-characters.pl
 lines-with-no-funny-characters.pl
                             - Print lines without funny characters
 
-from-one-line-per-word-to-one-line-per-sentence.py
-                            - Read one-line-per-word and convert to
-                            one-line-per-sentence.
+load-json-into-mongodb.py   - Load JSON from stdin into a MongoDB
 
 htmldecode.pl               - Decode HTML entities, e.g. &lt; becomes <
 
