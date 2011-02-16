@@ -42,6 +42,17 @@ htmlencode.pl               - Encode HTML entities, e.g. < becomes &lt;
 
 html2text                   - Convert HTML to text
 
+mongodb-field-lengths.py    - Print MongoDB field length and field,
+                            for every row.
+
+mongodb-remove-field.py     - Remove every occurrence of some field,
+                            for every row, in MongoDB.
+
+mongodb-remove-short-fields.py
+                            - Remove every occurrence of some field if it
+                            is shorter than some length, for every row,
+                            in MongoDB.
+
 one-sentence-per-line-to-json.py
                             - For line in stdin, convert it to a JSON
                             dict with key: "content" and value: line.
