@@ -7,6 +7,7 @@ for every row, in MongoDB
 import sys, string
 import common.mongodb
 import common.json
+import common.str
 
 from optparse import OptionParser
 
@@ -23,8 +24,14 @@ assert options.field is not None
 assert options.minlength is not None
 
 collection = common.mongodb.collection(DATABASE=options.database, name=options.collection, PORT=options.port, HOSTNAME=options.hostname)
+cnt = 0
+tot = 0
 for doc in common.mongodb.findall(collection, matchfn=lambda doc: options.field in doc, matchfn_description="has field %s" % options.field):
+    tot += 1
     if len(doc[options.field]) >= options.minlength: continue
+    cnt += 1
     print "FAKING IT, not actually removing %s: %s" % (options.field, repr(doc[options.field]))
 #    del doc[options.field]
 #    collection.save(doc)
+
+print >> sys.stderr, "Removed %s docs that are too short" % (common.str.percent(cnt, tot))
