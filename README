@@ -3,6 +3,9 @@ local/                      -Files of local interest, e.g. with fixed
 
 README.txt			        - This file
 
+all-xml-to-json.sh          - For every XML file in the command-line,
+                            convert it to JSON.
+
 citeseer-get.pl			    - Fetch PDFs from citeseer.
 
 cumulative.py               - Output a cumulative sum for each line in
