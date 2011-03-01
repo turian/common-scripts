@@ -28,6 +28,13 @@ from-one-line-per-word-to-one-line-per-sentence.py
                             - Read one-line-per-word and convert to
                             one-line-per-sentence.
 
+grep-json.py                - Filter JSON in sys.stdin to find only docs
+                            that match each regex against raw JSON.
+
+grep-json-by-field.py       - Filter JSON in sys.stdin to find only docs
+                            that match each regex with at least one
+                            field value.
+
 join-json.py                - For each JSON file in sys.argv, join them
                             and output to stdout.
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """
-Filter JSON in sys.stdin to find only docs that match each regex against raw JSON.
+Filter JSON in sys.stdin to find only docs that match each regex with
+at least one field value.
 
 e.g.
 
@@ -21,10 +22,17 @@ from common.str import percent
 keptdocs = []
 alldocs = common.json.load(sys.stdin)
 for doc in alldocs:
-    docjson = common.json.dumps(doc)
     missedone_regex = False
     for r in allre:
-        if not r.search(docjson):
+        foundone_field = False
+        for v in doc.values():
+            if r.search("%s" % v):
+#                print v
+                foundone_field = True
+                break
+#            else:
+#                print "miss", v.encode('utf-8')
+        if not foundone_field:
             missedone_regex = True
             break
     if missedone_regex: continue
