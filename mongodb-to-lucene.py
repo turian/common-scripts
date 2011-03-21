@@ -3,7 +3,6 @@
 Read all mongo docs, and insert them into Lucene.
 """
 
-import common.lucene
 import common.mongodb
 import sys, os, lucene
 
@@ -21,9 +20,10 @@ parser.add_option("--hostname", dest="hostname", help="hostname for mongodb")
 
 print options.storefield
 collection = common.mongodb.collection(DATABASE=options.database, name=options.collection, PORT=options.port, HOSTNAME=options.hostname)
-print dir(common.lucene)
-common.lucene.from_mongodb(collection, options.storefield, options.contentfield, options.lucenedir)
 
 lucene.initVM(lucene.CLASSPATH)
 print 'lucene', lucene.VERSION
 
+assert options.lucenedir is not None
+
+common.mongodb.to_lucene(collection, options.storefield, options.contentfield, options.lucenedir)
