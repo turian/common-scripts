@@ -63,6 +63,9 @@ mongodb-remove-short-fields.py
                             is shorter than some length, for every row,
                             in MongoDB.
 
+mongodb-to-lucene.py        - Read all mongo docs, and insert them
+                            into Lucene.
+
 one-sentence-per-line-to-json.py
                             - For line in stdin, convert it to a JSON
                             dict with key: "content" and value: line.
