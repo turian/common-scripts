@@ -44,6 +44,10 @@ lines-with-funny-characters.pl
 lines-with-no-funny-characters.pl
                             - Print lines without funny characters
 
+load-directory-of-textfiles-into-mongodb.py
+                            - For all files recursively in a subdir, load
+                            them into a MongoDB with a certain field name.
+
 load-json-into-mongodb.py   - Load JSON from stdin into a MongoDB
 
 htmldecode.pl               - Decode HTML entities, e.g. &lt; becomes <
