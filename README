@@ -6,6 +6,10 @@ README.txt			        - This file
 all-xml-to-json.sh          - For every XML file in the command-line,
                             convert it to JSON.
 
+boilerpipe-stdin-urls-to-mongo.py
+                            - Run every sys.stdin URL through Boilerpipe
+                            (or diffbot), and store in a MongoDB.
+
 citeseer-get.pl			    - Fetch PDFs from citeseer.
 
 cumulative.py               - Output a cumulative sum for each line in
