@@ -104,6 +104,9 @@ sort-curves.py              - Sort gnuplot curves
 
 tsv-to-json.py              - Read TSV from stdin and output as JSON.
 
+unichars                    - List characters for one or more properties
+                            (by Tom Christiansen)
+
 vowpal-to-libsvm.py         - Convert a vowpal-wabbit file in stdin
                             to libsvm.
 

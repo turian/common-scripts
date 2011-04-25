@@ -25,5 +25,8 @@ if options.collection is None:
 
 collection = common.mongodb.collection(DATABASE=options.database, name=options.collection, PORT=options.port, HOSTNAME=options.hostname)
 for doc in common.mongodb.findall(collection, matchfn=lambda doc: True):
-    common.json.dump(doc, sys.stdout, indent=4)
+    try:
+        common.json.dump(doc, sys.stdout, indent=4)
+    except:
+        print repr(doc)
 #    print string.strip(doc["content"].encode("utf-8"))
