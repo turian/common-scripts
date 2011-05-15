@@ -19,6 +19,10 @@ parser.add_option("-p", "--port", dest="port", help="port number for mongodb", t
 parser.add_option("--hostname", dest="hostname", help="hostname for mongodb")
 (options, args) = parser.parse_args()
 
+if options.database is None:
+    print "Databases:", common.mongodb.connection(PORT=options.port, HOSTNAME=options.hostname).database_names()
+    sys.exit(0)
+
 if options.collection is None:
     print "Collections:", common.mongodb.db(DATABASE=options.database, PORT=options.port, HOSTNAME=options.hostname).collection_names()
     sys.exit(0)
