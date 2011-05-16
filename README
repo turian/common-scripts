@@ -60,6 +60,9 @@ htmlencode.pl               - Encode HTML entities, e.g. < becomes &lt;
 
 html2text                   - Convert HTML to text
 
+mongodb-count.py            - Count the number of entries in a mongodb
+                            collection.
+
 mongodb-field-lengths.py    - Print MongoDB field length and field,
                             for every row.
 
