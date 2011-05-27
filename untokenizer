@@ -1,0 +1,68 @@
+#!/usr/bin/perl -w
+
+########################################################################################
+# Detokenize Penn Treebank formatted text so it can be used for
+# training sentence detectors and tokenizers. Based in part on
+# reversing the PTB tokenization script:
+#
+#     http://www.cis.upenn.edu/~treebank/tokenizer.sed
+#
+# WARNING: This script is lossless, e.g. some errors like: "cool" => (tokenize) "cool " => (untokenize) "cool "
+#
+# It is assumed that the input contains lines like:
+# 
+#   Pierre Vinken , 61 years old , will join the board as a nonexecutive director Nov. 29 .
+#   Mr. Vinken is chairman of Elsevier N.V. , the Dutch publishing group .
+# 
+# To detokenize to raw text, call as:
+#
+# $ ./createTokTrainingData.pl <input_file>
+#
+# This produces:
+#
+#   Pierre Vinken, 61 years old, will join the board as a nonexecutive director Nov. 29.
+#   Mr. Vinken is chairman of Elsevier N.V., the Dutch publishing group.
+#
+# To detokenize for training a tokenizer for OpenNLP, call as:
+#
+# $ ./createTokTrainingData.pl <input_file> -s
+#
+# This produces:
+#
+#   Pierre Vinken<SPLIT>, 61 years old<SPLIT>, will join the board as a nonexecutive director Nov. 29<SPLIT>.
+#   Mr. Vinken is chairman of Elsevier N.V.<SPLIT>, the Dutch publishing group<SPLIT>.
+#
+# This code doesn't merit a license -- do whatever you want with it.
+#
+# Jason Baldridge, 2010
+########################################################################################
+
+open(INPUT, $ARGV[0]) || die "Unable to open file: $ARGV[0]\n";
+
+# The replacement string, default is empty string
+my $REPLACE = "";
+$REPLACE = "<SPLIT>" if ($ARGV[1] eq "-s");
+
+# Long string that will be replaced later. Simplifies things for when
+# the $REPLACE string is the empty string.
+my $HOLDER = "<HOLDER123456789HOLDER>";
+
+while (<INPUT>) {
+  s/ ([,\.\?!%]|'')/$HOLDER\1/g;
+  s/ ('m|'d|'s|n't|'ll|'ve|'re)/$HOLDER\1/gi;
+  s/(``|\$) /\1$HOLDER/g;
+  s/ (' )/$HOLDER\1/g;
+  s/ (--) /$HOLDER\1$HOLDER/g;
+  s/-LRB- /\($HOLDER/g;
+  s/-LSB- /\[$HOLDER/g;
+  s/-LCB- /\{$HOLDER/g;
+  s/-RRB- /$HOLDER\)/g;
+  s/-RSB- /$HOLDER\]/g;
+  s/-RCB- /$HOLDER\}/g;
+  s/$HOLDER(\.\.\.)/ \1/g;
+
+  s/$HOLDER/$REPLACE/g;
+
+  print $_;
+}
+
