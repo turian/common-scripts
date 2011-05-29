@@ -107,6 +107,9 @@ sort-curves.py              - Sort gnuplot curves
 
 tokenizer.sed               - Penn Treebank tokenizer.
 
+tokenize-English.pl         - Word Tokenizer for English by Al-Onaizan
+                            and Melamed.
+
 tsv-to-json.py              - Read TSV from stdin and output as JSON.
 
 unichars                    - List characters for one or more properties
