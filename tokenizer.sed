@@ -31,12 +31,12 @@ s=[][(){}<>]= & =g
 # Some taggers, such as Adwait Ratnaparkhi's MXPOST, use the parsed-file
 # version of these symbols.
 # UNCOMMENT THE FOLLOWING 6 LINES if you're using MXPOST.
-# s/(/-LRB-/g
-# s/)/-RRB-/g
-# s/\[/-LSB-/g
-# s/\]/-RSB-/g
-# s/{/-LCB-/g
-# s/}/-RCB-/g
+s/(/-LRB-/g
+s/)/-RRB-/g
+s/\[/-LSB-/g
+s/\]/-RSB-/g
+s/{/-LCB-/g
+s/}/-RCB-/g
 
 s=--= -- =g
 
