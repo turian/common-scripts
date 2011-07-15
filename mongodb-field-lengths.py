@@ -20,5 +20,5 @@ parser.add_option("--hostname", dest="hostname", help="hostname for mongodb")
 assert options.field is not None
 
 collection = common.mongodb.collection(DATABASE=options.database, name=options.collection, PORT=options.port, HOSTNAME=options.hostname)
-for doc in common.mongodb.findall(collection, matchfn=lambda doc: options.field in doc, matchfn_description="has field %s" % options.field):
+for doc in common.mongodb.findall_with_field(collection, field=options.field):
     print len(doc[options.field]), repr(doc[options.field])[:1000]
