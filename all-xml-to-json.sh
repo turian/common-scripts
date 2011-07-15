@@ -7,6 +7,6 @@
 
 for f in "$@"
 do
-    echo "~/dev/python/common/xml2json/parker.py < ${f} > ${f}.json"
-    ~/dev/python/common/xml2json/parker.py < ${f} > ${f}.json
+    echo "cat ${f} | remove-non-utf10-characters.pl | ~/dev/python/common/xml2json/parker.py > ${f}.json"
+    cat ${f} | remove-non-utf10-characters.pl | ~/dev/python/common/xml2json/parker.py > ${f}.json
 done
