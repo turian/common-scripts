@@ -94,9 +94,13 @@ ptb/one-sentence-per-line.pl    - Output one PTB sentence per line,
 
 read-xml-mysqldump.py       - Read in the XML mysqldump from sys.sdin.
 
+remove-funny-characters.pl  - Remove any funny character
+
 remove-nonascii-characters.pl   - Remove non-ASCII characters
 
-remove-funny-characters.pl  - Remove any funny character
+remove-non-utf10-characters.pl  - Remove non-UTF 1.0 characters
+
+remove-non-utf11-characters.pl  - Remove non-UTF 1.1 characters
 
 sample.pl                   - Sample and print only a certain percentage
                             of input lines.
