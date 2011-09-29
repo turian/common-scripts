@@ -23,11 +23,12 @@ collection = common.mongodb.collection(DATABASE=options.database, name=options.c
 print "%s starts with %d docs" % (collection, collection.count())
 
 print "Reading JSON from sys.stdin..."
-docs = common.json.load(sys.stdin)
+docs = common.json.load(sys.stdin)["pages"]
 print "Read %d docs from sys.stdin JSON..." % len(docs)
 assert len(docs)>0
 
 for doc in docs:
-    doc["_id"] = doc["IncidentId"]
+    doc["_id"] = doc["id"]
+    del doc["id"]
     collection.save(doc)
 print "%s now has %d docs" % (collection, collection.count())
