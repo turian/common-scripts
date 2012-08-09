@@ -44,7 +44,10 @@ from common.file import myopen
 lines = []
 for n in args:
 #    sys.stderr.write("%s\n" % n)
-    f = myopen(n)
+    if n == "-":
+        f = sys.stdin
+    else:
+        f = myopen(n)
     lines.append(f.readlines())
     f.close()
 
