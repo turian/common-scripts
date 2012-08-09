@@ -10,6 +10,8 @@ import sys, string
 import common.mongodb
 import common.json
 
+from pprint import pprint
+
 from optparse import OptionParser
 
 parser = OptionParser()
@@ -32,5 +34,5 @@ for doc in common.mongodb.findall(collection, matchfn=lambda doc: True):
     try:
         common.json.dump(doc, sys.stdout, indent=4)
     except:
-        print repr(doc)
+        pprint(doc)
 #    print string.strip(doc["content"].encode("utf-8"))
