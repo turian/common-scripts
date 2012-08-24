@@ -1,0 +1,13 @@
+#!/usr/bin/python
+"""
+Find the last k percent of stdin
+"""
+
+import sys
+import string
+prog, perc = sys.argv
+perc = int(perc)
+
+ls = sys.stdin.readlines()
+cnt = int(len(ls) * perc / 100. + 0.5)
+sys.stdout.write(string.join(ls[-cnt:], ""))
